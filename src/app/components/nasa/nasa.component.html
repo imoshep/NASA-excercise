@@ -1,0 +1,4 @@
+<div class="nasa-wrapper">
+  <app-searchbox (dateRangeSubmitted)="submitRangeToResults($event)"></app-searchbox>
+  <app-search-results [dateRange]="dateRangeFromSearchBox" ></app-search-results>
+</div>

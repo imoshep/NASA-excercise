@@ -1,0 +1,3 @@
+<div  *ngIf="apodsToDisplay.length > 0" class="search-results">
+  <app-apod-card *ngFor="let apod of apodsToDisplay" [apod]="apod"></app-apod-card>
+</div>

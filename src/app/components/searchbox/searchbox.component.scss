@@ -1,0 +1,17 @@
+.search-box {
+  padding-bottom: 3rem;
+
+  & .input:first-child {
+    @media screen and (min-width: 576px) {
+      padding-right: 2rem;
+    }
+  }
+
+  & .form-field {
+    display: inline;
+  }
+
+  & .date-error {
+    display: inline;
+  }
+}

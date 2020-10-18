@@ -1,0 +1,20 @@
+.login-page {
+  background-color: #19198d;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & .login-box {
+    padding: 2rem 4rem;
+    background-color: white;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+
+    & .button {
+      &:hover {
+        background-color: #eee;
+      }
+    }
+  }
+}

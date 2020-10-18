@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "nasa-excercise": {
+      "hosting": {
+        "NASA-excercise": [
+          "nasa-excercise"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+.nasa-wrapper {
+  padding-top: 2rem;
+  text-align: center;
+
+  @media screen and (min-width: 576px) {
+    padding-top: 4rem;
+  }
+}
