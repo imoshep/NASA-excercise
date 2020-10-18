@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@
 import { Subscription } from 'rxjs';
 import { dateInThaPastValidator } from 'src/app/directives/date-validators.directive';
 import { Apod } from 'src/app/interfaces/apod';
-import { ParsedDates } from 'src/app/interfaces/parsed-dates';
+import { DatesNums } from 'src/app/interfaces/numbered-dates';
 import { NasaService } from 'src/app/services/nasa.service';
 
 @Component({
@@ -11,10 +11,10 @@ import { NasaService } from 'src/app/services/nasa.service';
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() dateRange: ParsedDates;
-  initSubscription: Subscription;
-  searchSubscription:Subscription;
-  apodsToDisplay: Apod[] = [];
+  @Input() dateRange: DatesNums;
+  public initSubscription: Subscription;
+  public searchSubscription:Subscription;
+  public apodsToDisplay: Apod[] = [];
 
 
   constructor(private nasaService: NasaService) { }
@@ -39,8 +39,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnDestroy(): void {
-    this.initSubscription.unsubscribe();
-    this.searchSubscription.unsubscribe();
+    this.initSubscription && this.initSubscription.unsubscribe();
+    this.searchSubscription && this.searchSubscription.unsubscribe();
   }
 
 }

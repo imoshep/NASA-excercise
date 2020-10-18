@@ -1,37 +1,55 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  isLoggedIn = false;
+  public loginStatus: Observable<any>;
   redirectUrl: string;
 
-  registeredUsers = [ { email: 'test@moveo.group', password: '123'}]
-
-  login(email, password) {
-
+  constructor(private auth: AngularFireAuth) {
+    this.loginStatus = new Observable((subscriber) => {
+      this.auth.onAuthStateChanged(subscriber);
+    })
   }
 
-  mockLogin(userData:{email: string, password: string}): any {
-    let valid = {email: false, password: false};
-    for(let user of this.registeredUsers) {
-      if (user.email === userData.email) {
-        valid.email = true;
-        if (user.password === userData.password) {
-          valid.password = true;
-          break;
-        }
-      }
+  async register(email: string, password: string) {
+    try {
+      if (!email || !password) throw new Error('Invalid email and/or password');
+      await this.auth.createUserWithEmailAndPassword(email, password);
+      return true;
+    } catch (error) {
+      console.error('sign in failed', error)
+      return false
     }
-
-    if (valid.email && valid.password) this.isLoggedIn = true;
-    return valid;
   }
 
-  logout(): void {
-    this.isLoggedIn = false;
+
+  async login(email: string, password: string) {
+    try {
+      if (!email || !password) throw new Error('Invalid email and/or password');
+      await this.auth.signInWithEmailAndPassword(email, password);
+      return true;
+    } catch (error) {
+      console.error('sign in failed', error)
+      return false
+    }
   }
+
+
+  async logout() {
+    console.log('logout from services');
+
+    try {
+      await this.auth.signOut();
+      console.log('signed out!');
+
+      return true;
+    } catch (error) {
+      console.log('Sign out failed', error);
+      return false;
+    }
+}
 }

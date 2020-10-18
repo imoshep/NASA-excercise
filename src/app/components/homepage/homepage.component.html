@@ -1,0 +1,24 @@
+<div class="homepage" [ngStyle]="{'background-image': 'url(' + getBG() +')'}">
+  <mat-card class="card">
+    <mat-card-title>
+      <h1>NASA Picture of the Day</h1>
+    </mat-card-title>
+    <mat-card-content>
+      <p>View Amazing Images from the Frontier of human Achievements!</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <ng-container *ngIf="!isLoading; else loading">
+        <ng-container *ngIf="isLoggedIn; else notLogged">
+          <button mat-raised-button color="primary" routerLink="apod">Come on in, browse the pictures</button>
+        </ng-container>
+        <ng-template #notLogged>
+          <button mat-raised-button color="primary" routerLink='login'>Log in to view pictures</button>
+          <button mat-raised-button routerLink="register">Not registered yet? Sign up</button>
+        </ng-template>
+      </ng-container>
+      <ng-template #loading>
+        <i class="fas fa-circle-notch fa-lg fa-spin"></i>
+      </ng-template>
+    </mat-card-actions>
+  </mat-card>
+</div>

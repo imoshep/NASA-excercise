@@ -4,6 +4,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDatepickerModule} from "@angular/material/datepicker"
+import { MatCardModule } from "@angular/material/card";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ApodCardComponent } from './components/apod-card/apod-card.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { RegisterComponent } from './components/register/register.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +35,9 @@ import { ApodCardComponent } from './components/apod-card/apod-card.component';
     SearchboxComponent,
     SearchResultsComponent,
     ApodCardComponent,
+    NavbarComponent,
+    RegisterComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,11 +46,14 @@ import { ApodCardComponent } from './components/apod-card/apod-card.component';
     HttpClientModule,
     ReactiveFormsModule,
     NoopAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCardModule
   ],
   providers: [AuthService, DatePipe, {provide: MAT_DATE_LOCALE, useValue: 'en-IL'}],
   bootstrap: [AppComponent]

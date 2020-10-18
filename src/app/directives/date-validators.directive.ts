@@ -4,7 +4,7 @@ export const dateGreaterThenDateValidator: ValidatorFn = (control: FormGroup): V
   const greater = control.get('to').value;
   const than = control.get('from').value;
 
-  return (greater < than ) ? {notGreaterThan: true} : null;
+  return greater && than && (greater < than ) ? {notGreaterThan: true} : null;
 }
 
 export function dateInThaPastValidator(now: number): ValidatorFn {

@@ -2,8 +2,9 @@ import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { dateGreaterThenDateValidator, dateInThaPastValidator } from 'src/app/directives/date-validators.directive';
-import { ParsedDates } from 'src/app/interfaces/parsed-dates';
+import { DatesNums } from 'src/app/interfaces/numbered-dates';
 import { NasaService } from 'src/app/services/nasa.service';
+
 
 @Component({
   selector: 'app-searchbox',
@@ -11,7 +12,7 @@ import { NasaService } from 'src/app/services/nasa.service';
   styleUrls: ['./searchbox.component.scss']
 })
 export class SearchboxComponent implements OnInit {
-  @Output() dateRangeSubmitted = new EventEmitter<ParsedDates>();
+  @Output() dateRangeSubmitted = new EventEmitter<DatesNums>();
   maxDate: Date;
 
   constructor(private nasaService: NasaService, private datepipe: DatePipe) {
@@ -23,16 +24,32 @@ export class SearchboxComponent implements OnInit {
     to: new FormControl('', [Validators.required, dateInThaPastValidator(Date.now())]),
   }, [dateGreaterThenDateValidator])
 
+  setSearchHistory(dates:{from: number, to: number}) {
+    let {from, to} = dates;
+    let searchHistoryArr: Array<DatesNums> = [];
+    let searchHistoryStr: string;
+
+    if (localStorage.getItem('searchHistory')) {
+      searchHistoryStr = localStorage.getItem('searchHistory');
+      searchHistoryArr = JSON.parse(searchHistoryStr);
+      if (searchHistoryArr[4]) searchHistoryArr.shift();
+    }
+
+    searchHistoryArr.push({from: from, to: to})
+
+    searchHistoryStr = JSON.stringify(searchHistoryArr);
+    localStorage.setItem('searchHistory', searchHistoryStr)
+  }
+
   onSubmit(): void {
     let {from, to} = this.apodFromTo.value
-    console.log();
 
+    let dates: DatesNums = {from: null, to: null};
+    dates.from = from.getTime();
+    dates.to = to.getTime();
 
-    let parsedDates: ParsedDates = {from: null, to: null};
-    parsedDates.from = from.getTime();
-    parsedDates.to = to.getTime();
-
-    this.dateRangeSubmitted.emit(parsedDates)
+    this.setSearchHistory(dates)
+    this.dateRangeSubmitted.emit(dates)
   }
 
   get from() { return this.apodFromTo.get('from'); }

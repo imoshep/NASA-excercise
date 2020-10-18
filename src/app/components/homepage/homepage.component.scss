@@ -1,0 +1,13 @@
+.homepage {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  background-size: cover;
+
+  & .card {
+    text-align: center;
+    padding: 1rem 3rem 4rem;
+  }
+}

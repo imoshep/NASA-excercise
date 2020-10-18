@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ParsedDates } from 'src/app/interfaces/parsed-dates';
+import { DatesNums } from 'src/app/interfaces/numbered-dates';
 
 @Component({
   selector: 'app-nasa',
@@ -7,7 +7,7 @@ import { ParsedDates } from 'src/app/interfaces/parsed-dates';
   styleUrls: ['./nasa.component.scss']
 })
 export class NasaComponent implements OnInit {
-  dateRangeFromSearchBox: ParsedDates;
+  dateRangeFromSearchBox: DatesNums;
   constructor() { }
 
   submitRangeToResults(range): void {

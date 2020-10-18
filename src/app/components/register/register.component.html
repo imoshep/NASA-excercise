@@ -1,0 +1,35 @@
+<div class="register-page">
+
+  <div class="register-box">
+    <h1>Welcome!</h1>
+    <p>Please sign up with your email, <br/> and choose a password:</p>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <label for="email">Email:</label>
+        <input matInput type="email" name="email" id="email" formControlName="email" required>
+        <mat-error *ngIf="email.invalid && (email.dirty || email.touched )">Must be a Valid Email</mat-error>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field>
+        <label for="password">Password:</label>
+        <input matInput type="password" name="password" id="password" formControlName="password" required>
+        <mat-error *ngIf="password.invalid && (password.dirty || password.touched )">Minimum 6 Characters</mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <label for="repeatPswd">Repeat Password:</label>
+        <input matInput type="password" name="repeatPswd" id="repeatPswd" formControlName="repeatPswd" required>
+        <div *ngIf="registrationForm.errors?.passDontMatch && (repeatPswd.dirty || repeatPswd.touched )">
+          <mat-error>Please verify your password </mat-error>
+        </div>
+      </mat-form-field>
+      <div *ngIf="registrationError">
+        <mat-error>{{registrationError}}</mat-error>
+      </div>
+      <br />
+      <button mat-raised-button type="submit" class="button" [disabled]="!registrationForm.valid">Login</button>
+    </form>
+  </div>
+</div>
