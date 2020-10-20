@@ -17,27 +17,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     repeatPswd: new FormControl('')
   }, [repeatPasswordValidator])
-  public registrationError = "" ;
+  public registrationError = '' ;
 
-  constructor(private auth: AuthService, private router: Router) {
-    this.loginStatus = this.auth.loginStatus.subscribe((user) => {
-      if (user) this.router.navigate([ 'apod' ])
-    })
-  }
+  constructor(private auth: AuthService, private router: Router) {}
 
   async onSubmit() {
     const {email, password} = this.registrationForm.value;
     try {
-      if (!this.registrationForm.valid) throw new Error('Invalid sign-in credentials');
-
-    const result = await this.auth.register(email, password);
-      if (result) this.router.navigate([ 'apod' ]);
-      else throw new Error('Registration failed');
+      if (!this.registrationForm.valid) throw new Error('Invalid registration credentials');
+      await this.auth.register(email, password);
+      this.router.navigateByUrl('apod')
     } catch (error) {
-        console.log(error);
         this.registrationError = error;
     }
   }
+
 
   ngOnInit(): void {
   }

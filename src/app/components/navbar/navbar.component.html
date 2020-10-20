@@ -5,6 +5,13 @@
     NASA Astronomy Picture of the Day
   </div>
   <div class="user">
-    <i class="fas fa-walking logout" (click)="logout()"></i>
+    <ng-container *ngIf="userEmail; else noUser">
+      <p>{{userEmail}}</p>
+      <i class="fas fa-walking logout" (click)="logout()"></i>
+    </ng-container>
+    <ng-template #noUser>
+      <i class="fas fa-user-plus" routerLink='login'></i>
+    </ng-template>
+
   </div>
 </div>

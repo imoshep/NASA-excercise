@@ -1,0 +1,24 @@
+.search-history {
+  background-color: rgb(111, 169, 228);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & .table-container {
+    width: 90%;
+
+    & table {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .search-history {
+    & .table-container {
+      width: 70%;
+    }
+  }
+}

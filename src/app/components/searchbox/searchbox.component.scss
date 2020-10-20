@@ -14,4 +14,9 @@
   & .date-error {
     display: inline;
   }
+
+  & .actions {
+    display: inline-flex;
+    gap: 1rem;
+  }
 }

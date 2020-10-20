@@ -17,6 +17,13 @@
       <div *ngIf="loginError">
         <mat-error>{{loginError}}</mat-error>
       </div>
+      <div class="providers-login">
+        Log in with:
+        <div class="buttons">
+          <button mat-button type="button" (click)="loginProviders('Facebook')"><i class="fab fa-facebook"></i>&nbsp;Facebook</button>
+          <button mat-button type="button" (click)="loginProviders('Google')"><i class="fab fa-google"></i>&nbsp;Google</button>
+        </div>
+      </div>
       <p>No account yet? <br/> <a routerLink="/register">Register now</a>.</p>
       <button mat-raised-button type="submit" class="button" [disabled]="!loginForm.valid">Login</button>
     </form>

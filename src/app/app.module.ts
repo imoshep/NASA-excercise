@@ -5,6 +5,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDatepickerModule} from "@angular/material/datepicker"
 import { MatCardModule } from "@angular/material/card";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,19 +15,25 @@ import { LoginComponent } from './components/login/login.component';
 import { NasaComponent } from './components/nasa/nasa.component';
 import { SearchboxComponent } from './components/searchbox/searchbox.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { AuthService } from './services/auth.service';
+import { ApodCardComponent } from './components/apod-card/apod-card.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { Redirect24HComponent } from './components/redirect24-h/redirect24-h.component';
+import { SearcheHistoryComponent } from './components/search-history/search-history.component';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { ApodCardComponent } from './components/apod-card/apod-card.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { RegisterComponent } from './components/register/register.component';
-import { HomepageComponent } from './components/homepage/homepage.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularToastifyModule, ToastService } from 'angular-toastify';
+
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -38,6 +46,8 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     NavbarComponent,
     RegisterComponent,
     HomepageComponent,
+    Redirect24HComponent,
+    SearcheHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,14 +58,18 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     NoopAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    AngularToastifyModule
   ],
-  providers: [AuthService, DatePipe, {provide: MAT_DATE_LOCALE, useValue: 'en-IL'}],
+  providers: [AuthService, DatePipe, {provide: MAT_DATE_LOCALE, useValue: 'en-IL'}, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,14 +10,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  public loginStatus: Subscription;
+  public userEmail: object;
+
+  constructor(private auth: AuthService, private router: Router) {
+    this.loginStatus = this.auth.loginStatus.subscribe((user) => {
+      if (user) this.userEmail = user.email;
+    })
+  }
 
   async logout() {
-    console.log('logout runnig');
-
     let result = await this.auth.logout();
-    console.log(result);
-
     result ? this.router.navigate([ 'login' ]) : alert('logout failed')
   }
 

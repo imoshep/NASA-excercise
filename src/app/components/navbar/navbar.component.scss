@@ -18,6 +18,8 @@
   }
 
   .user {
+    display: flex;
+
     & .logout {
       cursor: pointer;
     }

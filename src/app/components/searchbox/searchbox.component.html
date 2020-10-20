@@ -21,6 +21,9 @@
       <mat-error class="date-error">Dates should Be Earlier than the present day</mat-error>
     </div>
     <br />
-    <button mat-raised-button type="submit" [disabled]="(apodFromTo.errors || from.errors || to.errors)">See Pictures</button>
+    <div class="actions">
+      <button mat-raised-button type="button" routerLink="/history">Browse your search history</button>
+      <button mat-raised-button type="submit" color="primary" [disabled]="(apodFromTo.errors || from.errors || to.errors)">See Pictures</button>
+    </div>
   </form>
 </div>

@@ -17,22 +17,33 @@ export class LoginComponent implements OnInit, OnDestroy {
   });
   public loginError = ''
 
-  constructor(private auth: AuthService,  private router: Router) {
-    this.loginStatus = this.auth.loginStatus.subscribe((user) => {
-      if (user) this.router.navigate([ 'apod' ])
-    })
-  }
+  constructor(private auth: AuthService,  private router: Router) {}
 
   async onSubmit() {
     const { email, password } = this.loginForm.value;
     try {
       if (!this.loginForm.valid) throw new Error('Invalid sign-in credentials');
-      const result = await this.auth.login(email, password);
-      if (result) this.router.navigate([ 'apod' ]);
-      else throw new Error('Sign-in failed');
+      await this.auth.login(email, password);
+      this.router.navigateByUrl('apod')
     } catch (error) {
-        console.log(error);
-        this.loginError = error;
+      this.loginError = error.message;
+    }
+  }
+
+  loginProviders(provider: 'Google' | 'Facebook') {
+    try{
+      switch (provider) {
+        case 'Google':
+          this.auth.loginWithGoogle();
+          break;
+        case 'Facebook':
+          this.auth.loginWithFacebook();
+          break;
+        default:
+          break;
+      }
+    } catch (error) {
+      this.loginError = error.message;
     }
   }
 

@@ -29,19 +29,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('init');
-
     this.isLoading = true;
     this.initSubscription = this.getImage();
     this.loginSubscription = this.auth.loginStatus.subscribe((user) => {
-      console.log('from subscription');
+      console.log('subscribed to loginStatus');
 
       this.isLoggedIn = user ? true : false;
       this.isLoading = false;
-
-      console.log(user?.email);
-      console.log('isLoading:', this.isLoading);
-
     })
   }
 
