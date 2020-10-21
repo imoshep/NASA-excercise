@@ -20,6 +20,10 @@
   .user {
     display: flex;
 
+    & .profile-link {
+      cursor: pointer;
+    }
+
     & .logout {
       cursor: pointer;
     }

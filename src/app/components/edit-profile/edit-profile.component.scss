@@ -1,0 +1,37 @@
+.edit-profile {
+  background-color: #19198d;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & .form-box {
+    padding: 2rem 4rem;
+    background-color: white;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+
+    & .form {
+      & .mat-form-field {
+        margin-right: 0.5rem;
+      }
+
+      & .col1,
+      & .col2 {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .form-box {
+    max-width: 80vw;
+
+    & .input-fields {
+      display: flex;
+      gap: 2rem;
+    }
+  }
+}

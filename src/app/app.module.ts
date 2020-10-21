@@ -7,7 +7,8 @@ import { MatDatepickerModule} from "@angular/material/datepicker"
 import { MatCardModule } from "@angular/material/card";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
-
+import { MatIconModule } from '@angular/material/icon'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,9 +32,11 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
 
 import { environment } from 'src/environments/environment';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { environment } from 'src/environments/environment';
     HomepageComponent,
     Redirect24HComponent,
     SearcheHistoryComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,12 +63,15 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
+    MatIconModule,
     MatButtonModule,
+    MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule,
     MatTableModule,
     MatPaginatorModule,
     AngularToastifyModule

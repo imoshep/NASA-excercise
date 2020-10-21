@@ -6,7 +6,7 @@
   </div>
   <div class="user">
     <ng-container *ngIf="userEmail; else noUser">
-      <p>{{userEmail}}</p>
+      <div routerLink='/profile' class='profile-link'><p>{{userEmail}}</p></div>
       <i class="fas fa-walking logout" (click)="logout()"></i>
     </ng-container>
     <ng-template #noUser>

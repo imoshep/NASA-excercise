@@ -6,15 +6,33 @@ implemet providers in login and registration
 implemt 24h guard and specify routing
 =========================================
 diaplay table data as dates
-
 create a proper data format for search history (which db? users>history)
-implement error handeling @ search history & SearcheService
 implement button to search-history (where?)
 
+implement error handeling @ search history & SearcheService
 ==========================================
 users profiles db
 access restriction https://firebase.google.com/docs/rules/basics#default_rules_locked_mode
 display profile comp
 edit profile comp
 =========================================
-what do dbRef.push() return?
+what do dbRef.push() return? a reference to the element pushed
+
+todo:
+====
+profile diplay page
+implement error handeling @ search history & SearcheService
+upload image (
+  1. input
+  2. to storage and save url
+  3. display image
+)
+
+organize file and remove comments
+access restriction https://firebase.google.com/docs/rules/basics#default_rules_locked_mode
+implement Material module
+pagination
+ng-deep
+
+sometimes homepage doesn't resolve if there's a user or not.
+navbar (sometimes?) doesn't re-render on logout.

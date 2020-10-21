@@ -1,36 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { SearchHistoryService } from 'src/app/services/history.service';
-
-const MOCK_DATA = [
-  {time: 1603115116497, from: 1601499600000, to:1601586000000},
-  {time: 1603115100000, from: 1601586000000, to: 1601672400000},
-  {time: 1603115000000, from: 1601672400000, to: 1601758800000}
-]
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-search-history',
   templateUrl: './search-history.component.html',
   styleUrls: ['./search-history.component.scss']
 })
-export class SearcheHistoryComponent implements OnInit {
+export class SearcheHistoryComponent implements OnInit, AfterViewInit {
   columnsToDisplay: string[] = ['time', 'from', 'to'];
-  tableData = [];
+  tableData;
   tableLength: number;
+  isLoading: boolean = true;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private history: SearchHistoryService, private auth: AuthService) {
+  constructor(private history: SearchHistoryService, private auth: AuthService, private router: Router, private toast:ToastService) {
   }
 
   // gotoSearch
 
   ngOnInit(): void {
     this.auth.getCurrentUser().subscribe(user => {
+      if (user) {
       this.history.getHistory(user.uid)
       .subscribe(data => {
-        this.tableData = data;
-        this.tableLength = this.tableData.length;
-      });
+        this.tableData = new MatTableDataSource<any>(data);
+        this.tableLength = data.length;
+        console.log(this.paginator);
+        this.tableData.paginaotr = this.paginator;
+        this.isLoading = false;
+      })} else {
+        this.toast.error('No user found, plese sign-in');
+        this.router.navigateByUrl('/')
+      }
     });
   }
 
+  ngAfterViewInit(): void {
+  }
 }

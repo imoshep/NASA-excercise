@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     try {
       if (!this.registrationForm.valid) throw new Error('Invalid registration credentials');
       await this.auth.register(email, password);
-      this.router.navigateByUrl('apod')
+      this.router.navigateByUrl('/profile/edit')
     } catch (error) {
         this.registrationError = error;
     }

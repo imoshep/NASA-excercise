@@ -13,4 +13,17 @@ export interface UserFromFirebase {
   photoUrl?: string;
   providerData?: object[];
   refreshToken: string;
+  uid: string;
+}
+
+export interface User {
+  uid: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  ilID: string;
+  birthDate: number;
+  phone: string;
+  photoUrl: string;
 }

@@ -9,6 +9,7 @@ import { Redirect24HComponent } from './components/redirect24-h/redirect24-h.com
 import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { reduce } from 'rxjs/operators';
 import { SearcheHistoryComponent } from './components/search-history/search-history.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 const redirectLoggedInToApod = () => redirectLoggedInTo(['apod']);
 const redirectUnothorizedToLogin = () => redirectUnauthorizedTo(['login'])
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToApod}},
   {path: 'register', component: RegisterComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToApod}},
   {path: 'history', component: SearcheHistoryComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnothorizedToLogin}},
+  {path: 'profile', component: EditProfileComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnothorizedToLogin}},
   {path: 'redirect24h', component: Redirect24HComponent},
   {path: '**', redirectTo: ''}
 ];
